@@ -1,6 +1,6 @@
-# Just clIEmb it (aka 클IE밍)
+# Just clIEmbing (aka 클IE밍)
 
-### Cliembing = climb together regardless of I or E
+### = climb together regardless of I or E
 ### Together, we climb it.
 
 <br/>
