@@ -1,4 +1,4 @@
-# Just clIEmbing (aka 클IE밍)
+# Just clIEmbing it (aka 클IE밍)
 
 ### = climb together regardless of I or E
 ### Together, we climb it.
