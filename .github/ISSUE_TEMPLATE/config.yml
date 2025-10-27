@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/YOUR_USERNAME/YOUR_REPO/discussions
+    about: 전반적인 질문이나 아이디어를 공유해주세요
+  - name: Email
+    url: mailto:your-email@example.com
+    about: 비공개 질문이나 문의사항을 보내주세요
