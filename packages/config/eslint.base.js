@@ -1,7 +1,10 @@
-const js = require('@eslint/js');
-const tseslint = require('typescript-eslint');
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import hooks from 'eslint-plugin-react-hooks';
+import unused from 'eslint-plugin-unused-imports';
 
-module.exports = tseslint.config(
+export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -14,6 +17,9 @@ module.exports = tseslint.config(
         },
       },
     },
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    plugins: { react, 'react-hooks': hooks, 'unused-imports': unused },
+    settings: { react: { version: '19' } },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
@@ -34,5 +40,5 @@ module.exports = tseslint.config(
       '*.yaml',
       '*.yml',
     ],
-  }
-);
+  },
+];

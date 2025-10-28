@@ -1,11 +1,9 @@
-module.exports = {
-  singleQuote: true,
+/** @type {import('prettier').Config} */
+export default {
   semi: true,
-  tabWidth: 2,
-  useTabs: false,
+  singleQuote: false,
   trailingComma: 'all',
   printWidth: 100,
-  bracketSpacing: true,
+  tabWidth: 2,
   arrowParens: 'always',
 };
-

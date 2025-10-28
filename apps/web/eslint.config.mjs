@@ -1,7 +1,7 @@
-const reactConfig = require('./react.js');
+import baseConfig from '@config/eslint.base';
 
-module.exports = [
-  ...reactConfig,
+export default [
+  ...baseConfig,
   {
     rules: {
       '@next/next/no-html-link-for-pages': 'off',

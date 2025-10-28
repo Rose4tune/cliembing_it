@@ -8,10 +8,15 @@
   },
   "scripts": {
     "dev": "turbo run dev",
+    "dev:web": "pnpm --filter=@web dev",
     "build": "turbo run build",
+    "build:web": "pnpm --filter=@web build",
     "lint": "turbo run lint",
+    "lint:web": "pnpm --filter=@web lint",
     "test": "turbo run test",
+    "test:web": "pnpm --filter=@web test",
     "typecheck": "turbo run typecheck",
+    "typecheck:web": "pnpm --filter=@web typecheck",
     "prepare": "husky install",
     "clean": "rimraf dist .next .turbo storybook-static"
   },

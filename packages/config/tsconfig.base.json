@@ -1,30 +1,5 @@
 {
   "compilerOptions": {
-    // Type Checking
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    // Modules
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    // Emit
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "noEmit": true,
-    // JavaScript Support
-    "allowJs": true,
-    "checkJs": false,
-    // Interop Constraints
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    // Language and Environment
     "target": "ES2022",
     "lib": [
       "ES2022",
@@ -32,17 +7,51 @@
       "DOM.Iterable"
     ],
     "jsx": "preserve",
-    // Completeness
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    // Path Mapping (to be extended by apps/packages)
-    "baseUrl": ".",
-    "paths": {}
+    "baseUrl": "../../",
+    "paths": {
+      "@packages/*": [
+        "packages/*"
+      ],
+      "@config/*": [
+        "packages/config/*"
+      ],
+      "@style/*": [
+        "packages/style/*"
+      ],
+      "@apps/*": [
+        "apps/*"
+      ],
+    }
   },
   "exclude": [
     "node_modules",
     "dist",
     "build",
     ".next",
-    ".turbo"
+    ".turbo",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ]
 }

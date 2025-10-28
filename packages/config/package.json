@@ -1,13 +1,5 @@
 {
-  "name": "@cliembing/config",
+  "name": "@config",
   "version": "0.0.0",
-  "private": true,
-  "description": "Shared configuration for ESLint, TypeScript, Tailwind, and Prettier",
-  "main": "index.js",
-  "files": [
-    "eslint",
-    "typescript",
-    "tailwind",
-    "prettier.config.js"
-  ]
+  "description": "Shared configuration for ESLint, TypeScript, Tailwind, and Prettier"
 }
