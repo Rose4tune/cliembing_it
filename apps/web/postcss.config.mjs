@@ -1,1 +1,1 @@
-export { default } from '@config/postcss.base.mjs';
+export { default } from '../../packages/config/postcss.base.mjs';
