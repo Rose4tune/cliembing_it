@@ -1,0 +1,18 @@
+{
+  "name": "@pkg/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./providers": "./lib/providers.ts",
+    "./callbacks": "./lib/callbacks.ts",
+    "./options": "./lib/options.ts",
+    "./constants": "./lib/constants.ts"
+  },
+  "peerDependencies": {
+    "next": "^16",
+    "next-auth": "^4",
+    "react": "^19"
+  }
+}

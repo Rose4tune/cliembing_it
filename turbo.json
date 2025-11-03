@@ -1,6 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "KAKAO_CLIENT_ID",
+    "KAKAO_CLIENT_SECRET",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_ROLE_KEY"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -9,6 +18,15 @@
         "!.next/cache/**",
         "dist/**",
         "storybook-static/**"
+      ],
+      "env": [
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
+        "KAKAO_CLIENT_ID",
+        "KAKAO_CLIENT_SECRET",
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "SUPABASE_SERVICE_ROLE_KEY"
       ]
     },
     "dev": {
