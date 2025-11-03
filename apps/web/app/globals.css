@@ -1,2 +1,1 @@
-@import 'tailwindcss';
-@import '@pkg/style/tailwind.base.css';
+@import "../../../packages/style/src/theme.css";
