@@ -1,0 +1,13 @@
+{
+  "name": "@pkg/env",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/env.server.ts",
+    "./client": "./src/env.client.ts"
+  },
+  "peerDependencies": {
+    "zod": "^3"
+  }
+}

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "next": "16.0.0",
+    "next-auth": "^4.24.13",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@config": "workspace:*",
-    "@style": "workspace:*"
+    "@pkg/config": "workspace:*",
+    "@pkg/style": "workspace:*",
+    "@pkg/auth": "workspace:*",
+    "@pkg/env": "workspace:*",
+    "@pkg/supabase": "workspace:*"
   }
 }
-

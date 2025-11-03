@@ -1,5 +1,2 @@
 @import 'tailwindcss';
-@import '@style/tailwind.base.css';
-
-/* Additional global styles */
-
+@import '@pkg/style/tailwind.base.css';
