@@ -1,0 +1,11 @@
+{
+  "name": "@pkg/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./ports/*": "./src/ports/*.ts",
+    "./adapters/*": "./src/adapters/*/index.ts"
+  }
+}
