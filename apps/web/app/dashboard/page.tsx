@@ -43,7 +43,7 @@ export default function DashboardPage() {
         <h1 className="text-4xl font-bold text-center">대시보드</h1>
 
         {session ? (
-          <div className="bg-white shadow-lg rounded-lg p-8 space-y-6">
+          <div className="bg-background shadow-lg rounded-lg p-8 space-y-6">
           <div className="text-center">
             <p className="text-xl font-semibold mb-2">
               환영합니다, {session.user?.name}님!
