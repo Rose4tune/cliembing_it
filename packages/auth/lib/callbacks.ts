@@ -1,5 +1,7 @@
 import type { CallbacksOptions } from "next-auth";
 import { authLogger } from "./logger";
+import { isKakaoProfile, extractKakaoUserInfo } from "../types/kakao";
+import { userService } from "./services/user-service";
 
 export const callbacks: Partial<CallbacksOptions> = {
   async jwt({ token, account, profile, user, trigger }) {
@@ -12,27 +14,20 @@ export const callbacks: Partial<CallbacksOptions> = {
 
     // 최초 로그인 시 provider_id 저장
     if (account && profile && account.provider === "kakao") {
-      const kakaoId = String((profile as any).id);
-      token.providerId = kakaoId;
-      token.provider = account.provider;
+      if (isKakaoProfile(profile)) {
+        const { id } = extractKakaoUserInfo(profile);
+        token.providerId = id;
+        token.provider = account.provider;
 
-      authLogger.session(`카카오 ID 저장: ${kakaoId}`);
+        authLogger.session(`카카오 ID 저장: ${id}`);
+      }
     }
 
     // provider_id가 있으면 매번 Supabase에서 최신 데이터 조회
     if (token.providerId) {
-      const { createClient } = await import("@supabase/supabase-js");
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY ||
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      const supabaseUser = await userService.getUserByProviderId(
+        token.providerId as string
       );
-
-      const { data: supabaseUser } = await supabase
-        .from("users")
-        .select("id, nickname, email, auth_provider, mbti, base_level, role")
-        .eq("provider_id", token.providerId as string)
-        .single();
 
       if (supabaseUser) {
         token.supabaseId = supabaseUser.id;
@@ -51,15 +46,19 @@ export const callbacks: Partial<CallbacksOptions> = {
 
   async session({ session, token }) {
     if (session.user && token) {
-      (session.user as any).id = token.supabaseId || token.sub;
-      (session.user as any).nickname = token.nickname;
-      (session.user as any).mbti = token.mbti;
-      (session.user as any).baseLevel = token.baseLevel;
-      (session.user as any).role = token.role;
-      (session.user as any).provider = token.provider;
+      // 타입 단언을 통해 확장된 사용자 속성 할당
+      const user = session.user as any;
+      user.id = token.supabaseId || token.sub || "";
+      user.nickname = token.nickname || null;
+      user.mbti = token.mbti || null;
+      user.baseLevel = token.baseLevel || null;
+      user.role = token.role || null;
+      user.provider = token.provider || null;
 
-      session.user.name = token.nickname as string;
-      session.user.email = token.email as string;
+      session.user.name =
+        (token.nickname as string) || session.user.name || null;
+      session.user.email =
+        (token.email as string) || session.user.email || null;
 
       authLogger.session("세션 업데이트 완료");
     }
@@ -73,19 +72,18 @@ export const callbacks: Partial<CallbacksOptions> = {
       userName: user?.name,
     });
 
-    if (account?.provider === "kakao") {
-      const kakaoId = String((profile as any)?.id);
-
-      if (!kakaoId) {
-        authLogger.error("카카오 ID를 찾을 수 없습니다");
+    if (account?.provider === "kakao" && profile) {
+      if (!isKakaoProfile(profile)) {
+        authLogger.error("유효하지 않은 카카오 프로필");
         return true;
       }
 
-      const { syncUserToSupabase } = await import("./supabase-sync");
-      const supabaseUserId = await syncUserToSupabase(kakaoId, {
-        name: user?.name,
-        email: user?.email,
-        image: user?.image,
+      const { id, nickname, email, image } = extractKakaoUserInfo(profile);
+
+      const supabaseUserId = await userService.syncUser(id, {
+        name: nickname,
+        email,
+        image,
       });
 
       if (!supabaseUserId) {
