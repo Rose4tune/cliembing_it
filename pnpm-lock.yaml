@@ -121,6 +121,12 @@ importers:
       '@pkg/supabase':
         specifier: workspace:*
         version: link:../../packages/supabase
+      '@pkg/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@pkg/ui-web':
+        specifier: workspace:*
+        version: link:../../packages/ui-web
 
   packages/auth:
     dependencies:
@@ -176,6 +182,24 @@ importers:
       react-dom:
         specifier: ^19
         version: 19.2.0(react@19.2.0)
+
+  packages/ui-web:
+    dependencies:
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^19
+        version: 19.2.0
+      react-dom:
+        specifier: ^19
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2.5.5
+        version: 2.6.0
 
 packages:
 
@@ -1961,6 +1985,9 @@ packages:
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
+
+  tailwind-merge@2.6.0:
+    resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
 
   tailwindcss@4.1.16:
     resolution: {integrity: sha512-pONL5awpaQX4LN5eiv7moSiSPd/DLDzKVRJz8Q9PgzmAdd1R4307GQS2ZpfiN7ZmekdQrfhZZiSE5jkLR4WNaA==}
@@ -3854,6 +3881,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  tailwind-merge@2.6.0: {}
 
   tailwindcss@4.1.16: {}
 

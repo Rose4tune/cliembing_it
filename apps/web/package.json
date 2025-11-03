@@ -21,6 +21,8 @@
     "@pkg/style": "workspace:*",
     "@pkg/auth": "workspace:*",
     "@pkg/env": "workspace:*",
-    "@pkg/supabase": "workspace:*"
+    "@pkg/supabase": "workspace:*",
+    "@pkg/ui": "workspace:*",
+    "@pkg/ui-web": "workspace:*"
   }
 }
