@@ -1,14 +1,32 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "../../",
-    "composite": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@pkg/auth": [
+        "../../packages/auth/index.ts"
+      ],
+      "@pkg/auth/*": [
+        "../../packages/auth/*"
+      ],
+      "@pkg/env/server": [
+        "../../packages/env/src/env.server.ts"
+      ],
+      "@pkg/env/client": [
+        "../../packages/env/src/env.client.ts"
+      ],
+      "@pkg/supabase/server": [
+        "../../packages/supabase/src/server.ts"
+      ],
+      "@pkg/supabase/client": [
+        "../../packages/supabase/src/client.ts"
+      ]
+    }
   },
   "include": [
     "**/*.ts",
