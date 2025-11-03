@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "@pkg/auth";
-import { authOptions } from "@pkg/auth";
-import { deleteUserFromSupabase } from "@pkg/auth/lib/delete-user";
+import { getServerSession, authOptions, userService } from "@pkg/auth";
 
 /**
  * 회원 탈퇴 API
@@ -28,7 +26,7 @@ export async function DELETE() {
     }
 
     // Supabase에서 사용자 삭제
-    const success = await deleteUserFromSupabase(userId);
+    const success = await userService.deleteUser(userId);
 
     if (!success) {
       return NextResponse.json(
