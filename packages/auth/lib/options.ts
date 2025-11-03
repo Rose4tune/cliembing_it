@@ -2,12 +2,12 @@ import type { NextAuthOptions } from "next-auth";
 import { getProviders } from "./providers";
 import { callbacks } from "./callbacks";
 import { AUTH_PAGES } from "./constants";
+import { authLogger } from "./logger";
 
-export const isProd = process.env.NODE_ENV === "production";
-// HTTPS 개발 서버 사용 여부 체크
+const isProd = process.env.NODE_ENV === "production";
 const isHttps = process.env.NEXTAUTH_URL?.startsWith("https://");
 
-console.log("🔧 [NextAuth Config]", {
+authLogger.config({
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   isHttps,
   useSecureCookies: isHttps,
@@ -23,7 +23,6 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30일
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
-  // HTTPS 사용 시 자동으로 secure cookie 사용
+  debug: !isProd,
   useSecureCookies: isHttps,
 };

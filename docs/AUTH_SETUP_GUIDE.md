@@ -110,13 +110,12 @@ openssl rand -base64 32
 ### 개발 서버 실행
 
 ```bash
-cd apps/web
-pnpm dev
+pnpm dev:web
 ```
 
 ### 테스트 순서
 
-1. http://localhost:3000 접속
+1. https://localhost:3000 접속
 2. "로그인하기" 버튼 클릭
 3. 카카오 로그인 버튼 클릭
 4. 카카오 로그인 진행

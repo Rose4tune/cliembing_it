@@ -16,17 +16,17 @@ export default function DashboardPage() {
 
         {session ? (
           <div className="bg-white shadow-lg rounded-lg p-8 space-y-6">
-            <div className="text-center">
-              <p className="text-xl font-semibold mb-2">
-                환영합니다, {session.user?.name}님!
-              </p>
-              <p className="text-gray-600 text-sm">
-                {session.user?.email}
-              </p>
-            </div>
+          <div className="text-center">
+            <p className="text-xl font-semibold mb-2">
+              환영합니다, {session.user?.name}님!
+            </p>
+            <p className="text-gray-600 text-sm">
+              {session.user?.email}
+            </p>
+          </div>
 
-            <div className="border-t pt-6">
-              <h2 className="font-semibold mb-3">사용자 정보 (Supabase)</h2>
+          <div className="border-t pt-6">
+            <h2 className="font-semibold mb-3">프로필</h2>
               <div className="space-y-2 text-sm">
                 <p>닉네임: {(session.user as any)?.nickname || session.user?.name || "-"}</p>
                 <p>이메일: {session.user?.email || "-"}</p>

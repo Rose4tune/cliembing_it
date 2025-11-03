@@ -1,8 +1,3 @@
-/**
- * @pkg/auth
- * NextAuth v4 설정 및 인증 관련 유틸리티
- */
-
 export { handlers } from "./lib/auth";
 export { authOptions } from "./lib/options";
 export { getProviders } from "./lib/providers";
@@ -13,6 +8,10 @@ export {
   AUTH_COOKIE_NAME,
   PROTECTED_ROUTES,
 } from "./lib/constants";
+export { authLogger, supabaseLogger } from "./lib/logger";
 
-// v4에서 getServerSession 사용
+// v4 API
 export { getServerSession } from "next-auth";
+
+// 디버깅 도구 (개발 환경에서만 사용)
+export { testSupabaseConnection } from "./lib/supabase-test";
