@@ -3,6 +3,7 @@ export { authOptions } from "./lib/options";
 export { getProviders } from "./lib/providers";
 export { callbacks } from "./lib/callbacks";
 export { syncUserToSupabase } from "./lib/supabase-sync";
+export { deleteUserFromSupabase } from "./lib/delete-user";
 export {
   AUTH_PAGES,
   AUTH_COOKIE_NAME,

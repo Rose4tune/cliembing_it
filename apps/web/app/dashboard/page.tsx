@@ -1,12 +1,40 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import { useState } from "react";
 
 export default function DashboardPage() {
   const { data: session } = useSession();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!confirm("정말로 회원 탈퇴하시겠습니까?\n모든 데이터가 삭제되며 복구할 수 없습니다.")) {
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      const response = await fetch("/api/auth/delete-account", {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("회원 탈퇴 실패");
+      }
+
+      alert("회원 탈퇴가 완료되었습니다.");
+      await signOut({ callbackUrl: "/" });
+    } catch (error) {
+      console.error("회원 탈퇴 에러:", error);
+      alert("회원 탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.");
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -36,12 +64,22 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <button
-              onClick={handleSignOut}
-              className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
-            >
-              로그아웃
-            </button>
+            <div className="space-y-3">
+              <button
+                onClick={handleSignOut}
+                className="w-full bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                로그아웃
+              </button>
+
+              <button
+                onClick={handleDeleteAccount}
+                disabled={isDeleting}
+                className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {isDeleting ? "탈퇴 처리 중..." : "회원 탈퇴"}
+              </button>
+            </div>
           </div>
         ) : (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
