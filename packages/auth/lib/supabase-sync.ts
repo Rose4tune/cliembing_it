@@ -47,23 +47,12 @@ export async function syncUserToSupabase(
       .single();
 
     if (existingByKakaoId) {
-      supabaseLogger.success(`기존 사용자 발견: ${existingByKakaoId.id}`);
+      supabaseLogger.success(
+        `기존 사용자 발견 - 정보 유지: ${existingByKakaoId.id}`
+      );
 
-      const { error: updateError } = await supabase
-        .from("users")
-        .update({
-          nickname: user.name,
-          email: user.email,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", existingByKakaoId.id);
-
-      if (updateError) {
-        supabaseLogger.error("사용자 업데이트 실패", updateError);
-      } else {
-        supabaseLogger.success("사용자 정보 업데이트 완료");
-      }
-
+      // 기존 사용자는 Supabase 데이터를 유지 (덮어쓰지 않음)
+      // 사용자가 직접 수정한 닉네임, MBTI 등을 보존
       return existingByKakaoId.id;
     }
 
@@ -77,20 +66,22 @@ export async function syncUserToSupabase(
         .single();
 
       if (existingByEmail) {
-        supabaseLogger.sync("이메일로 기존 사용자 발견, provider_id 업데이트");
+        supabaseLogger.sync(
+          "이메일로 기존 사용자 발견, provider_id만 업데이트"
+        );
 
+        // provider_id만 업데이트 (닉네임 등 기존 데이터 유지)
         const { error: updateError } = await supabase
           .from("users")
           .update({
             provider_id: kakaoId,
-            nickname: user.name,
             auth_provider: "kakao",
             updated_at: new Date().toISOString(),
           })
           .eq("id", existingByEmail.id);
 
         if (updateError) {
-          supabaseLogger.error("사용자 업데이트 실패", updateError);
+          supabaseLogger.error("provider_id 업데이트 실패", updateError);
         } else {
           supabaseLogger.success("provider_id 업데이트 완료");
         }
