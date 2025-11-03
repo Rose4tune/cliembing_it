@@ -18,6 +18,7 @@
     "test:web": "pnpm --filter=@web test",
     "typecheck": "turbo run typecheck",
     "typecheck:web": "pnpm --filter=@web typecheck",
+    "add:ui": "node scripts/add-shadcn.js",
     "prepare": "husky install",
     "clean": "rimraf dist .next .turbo storybook-static"
   },
