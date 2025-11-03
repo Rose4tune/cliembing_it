@@ -10,9 +10,17 @@ export const callbacks: Partial<CallbacksOptions> = {
       trigger,
     });
 
+    // 최초 로그인 시 provider_id 저장
     if (account && profile && account.provider === "kakao") {
       const kakaoId = String((profile as any).id);
+      token.providerId = kakaoId;
+      token.provider = account.provider;
 
+      authLogger.session(`카카오 ID 저장: ${kakaoId}`);
+    }
+
+    // provider_id가 있으면 매번 Supabase에서 최신 데이터 조회
+    if (token.providerId) {
       const { createClient } = await import("@supabase/supabase-js");
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,7 +31,7 @@ export const callbacks: Partial<CallbacksOptions> = {
       const { data: supabaseUser } = await supabase
         .from("users")
         .select("id, nickname, email, auth_provider, mbti, base_level, role")
-        .eq("provider_id", kakaoId)
+        .eq("provider_id", token.providerId as string)
         .single();
 
       if (supabaseUser) {
@@ -33,9 +41,8 @@ export const callbacks: Partial<CallbacksOptions> = {
         token.mbti = supabaseUser.mbti;
         token.baseLevel = supabaseUser.base_level;
         token.role = supabaseUser.role;
-        token.provider = account.provider;
 
-        authLogger.session("Supabase 사용자 정보 로드 완료");
+        authLogger.session("Supabase 최신 데이터 로드 완료");
       }
     }
 
