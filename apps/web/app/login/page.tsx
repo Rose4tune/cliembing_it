@@ -1,10 +1,13 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   const handleKakaoLogin = async () => {
     setIsLoading(true);
@@ -60,6 +63,31 @@ export default function LoginPage() {
             )}
           </button>
 
+          {/* 에러 메시지 */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-800">
+              <p className="font-semibold mb-2">❌ 로그인 실패</p>
+              <p className="text-xs">
+                에러 코드: {error}
+                {error === "OAuthSignin" && (
+                  <>
+                    <br />
+                    <br />
+                    해결 방법:
+                    <br />
+                    1. .env.local에 KAKAO_CLIENT_ID 확인
+                    <br />
+                    2. 카카오 Developers Redirect URI 확인:
+                    <br />
+                    &nbsp;&nbsp;&nbsp;http://localhost:3000/api/auth/callback/kakao
+                    <br />
+                    3. 개발 서버 재시작
+                  </>
+                )}
+              </p>
+            </div>
+          )}
+
           {/* 안내 메시지 */}
           <div className="text-center text-sm text-gray-500 space-y-2">
             <p>카카오 계정으로 간편하게 로그인하세요</p>
@@ -67,15 +95,6 @@ export default function LoginPage() {
               로그인 시 서비스 이용약관에 동의한 것으로 간주됩니다
             </p>
           </div>
-
-          {/* 환경변수 체크 (개발용) */}
-          {process.env.NODE_ENV === "development" && (
-            <div className="mt-6 p-3 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800">
-              <p className="font-semibold mb-1">🔧 개발 모드 - 환경변수 상태:</p>
-              <p>SUPABASE_URL: {process.env.NEXT_PUBLIC_SUPABASE_URL ? "✅" : "❌"}</p>
-              <p>SUPABASE_ANON_KEY: {process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "✅" : "❌"}</p>
-            </div>
-          )}
         </div>
       </div>
     </main>

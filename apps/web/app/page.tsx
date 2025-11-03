@@ -28,13 +28,26 @@ export default function Home() {
           {status === "loading" ? (
             <p className="text-gray-500">로딩 중...</p>
           ) : session ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-              <p className="text-green-800 font-semibold mb-2">
-                ✅ 로그인됨
-              </p>
-              <p className="text-sm text-gray-700">
-                환영합니다, {session.user?.name || session.user?.email}님!
-              </p>
+            <div className="space-y-4">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <p className="text-green-800 font-semibold mb-2">
+                  ✅ 로그인됨
+                </p>
+                <p className="text-sm text-gray-700">
+                  환영합니다, {(session.user as any)?.nickname || session.user?.name || session.user?.email}님!
+                </p>
+                {(session.user as any)?.mbti && (
+                  <p className="text-xs text-gray-600 mt-1">
+                    MBTI: {(session.user as any).mbti}
+                  </p>
+                )}
+              </div>
+              <Link
+                href="/dashboard"
+                className="inline-block bg-green-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                대시보드 가기
+              </Link>
             </div>
           ) : (
             <Link

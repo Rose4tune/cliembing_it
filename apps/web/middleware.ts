@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
  */
 export default withAuth(
   function middleware(req) {
+    // 인증된 요청만 통과
     return NextResponse.next();
   },
   {
@@ -18,6 +19,7 @@ export default withAuth(
     pages: {
       signIn: "/login",
     },
+    secret: process.env.NEXTAUTH_SECRET,
   }
 );
 
