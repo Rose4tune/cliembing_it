@@ -1,2 +1,2 @@
 // UI primitives barrel export
-export * from "./primitives/Button";
+export { Button, type ButtonProps } from "./primitives/Button";

@@ -90,6 +90,30 @@ importers:
 
   apps/web:
     dependencies:
+      '@pkg/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@pkg/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@pkg/env':
+        specifier: workspace:*
+        version: link:../../packages/env
+      '@pkg/features':
+        specifier: workspace:*
+        version: link:../../packages/features
+      '@pkg/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@pkg/supabase':
+        specifier: workspace:*
+        version: link:../../packages/supabase
+      '@pkg/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@pkg/ui-web':
+        specifier: workspace:*
+        version: link:../../packages/ui-web
       next:
         specifier: 16.0.0
         version: 16.0.0(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -106,27 +130,12 @@ importers:
         specifier: 19.2.0
         version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@pkg/auth':
-        specifier: workspace:*
-        version: link:../../packages/auth
       '@pkg/config':
         specifier: workspace:*
         version: link:../../packages/config
-      '@pkg/env':
-        specifier: workspace:*
-        version: link:../../packages/env
       '@pkg/style':
         specifier: workspace:*
         version: link:../../packages/style
-      '@pkg/supabase':
-        specifier: workspace:*
-        version: link:../../packages/supabase
-      '@pkg/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@pkg/ui-web':
-        specifier: workspace:*
-        version: link:../../packages/ui-web
 
   packages/auth:
     dependencies:

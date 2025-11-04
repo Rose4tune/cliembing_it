@@ -31,18 +31,36 @@
     "skipLibCheck": true,
     "baseUrl": "../../",
     "paths": {
-      "@pkg/*": [
-        "packages/*"
+      "@pkg/auth": [
+        "packages/auth/index.ts"
       ],
-      "@config/*": [
+      "@pkg/config/*": [
         "packages/config/*"
       ],
-      "@style/*": [
-        "packages/style/*"
+      "@pkg/domain/*": [
+        "packages/domain/src/*"
       ],
-      "@apps/*": [
-        "apps/*"
+      "@pkg/env/*": [
+        "packages/env/src/*"
       ],
+      "@pkg/features/*": [
+        "packages/features/src/*"
+      ],
+      "@pkg/shared/*": [
+        "packages/shared/src/*"
+      ],
+      "@pkg/style/*": [
+        "packages/style/src/*"
+      ],
+      "@pkg/supabase/*": [
+        "packages/supabase/src/*"
+      ],
+      "@pkg/ui": [
+        "packages/ui/src/index.ts"
+      ],
+      "@pkg/ui-web/*": [
+        "packages/ui-web/src/*"
+      ]
     }
   },
   "exclude": [

@@ -1,52 +1,16 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@pkg/auth": [
-        "../../packages/auth/index.ts"
-      ],
-      "@pkg/auth/*": [
-        "../../packages/auth/*"
-      ],
-      "@pkg/ui": [
-        "../../packages/ui/src/index.ts"
-      ],
-      "@pkg/ui/*": [
-        "../../packages/ui/src/*"
-      ],
-      "@pkg/env/server": [
-        "../../packages/env/src/env.server.ts"
-      ],
-      "@pkg/env/client": [
-        "../../packages/env/src/env.client.ts"
-      ],
-      "@pkg/supabase/server": [
-        "../../packages/supabase/src/server.ts"
-      ],
-      "@pkg/supabase/client": [
-        "../../packages/supabase/src/client.ts"
-      ]
-    }
+    ]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".next",
-    ".turbo",
-    "**/*.test.ts",
-    "**/*.test.tsx"
   ]
 }
