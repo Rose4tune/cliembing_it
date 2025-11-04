@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@pkg/ui";
+import { Button } from "@pkg/ui-web";
 import { ThemeToggle } from "../components/ThemeToggle";
 
 export default function TestButtonPage() {
@@ -13,7 +13,7 @@ export default function TestButtonPage() {
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Variants</h2>
           <div className="flex gap-3 flex-wrap">
-            <Button variant="primary">Primary</Button>
+            <Button variant="default">Default</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="destructive">Destructive</Button>
             <Button variant="ghost">Ghost</Button>
@@ -25,7 +25,7 @@ export default function TestButtonPage() {
           <h2 className="text-xl font-semibold">Sizes</h2>
           <div className="flex gap-3 items-center flex-wrap">
             <Button size="sm">Small</Button>
-            <Button size="md">Medium</Button>
+            <Button size="default">Default</Button>
             <Button size="lg">Large</Button>
           </div>
         </section>

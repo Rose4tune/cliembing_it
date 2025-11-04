@@ -58,6 +58,9 @@
       "@pkg/ui": [
         "packages/ui/src/index.ts"
       ],
+      "@pkg/ui-web": [
+        "packages/ui-web/src/index.ts"
+      ],
       "@pkg/ui-web/*": [
         "packages/ui-web/src/*"
       ]

@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { Button } from "@pkg/ui";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -59,6 +60,13 @@ export default function Home() {
               로그인하기
             </Link>
           )}
+          <div className="flex gap-3 flex-wrap">
+            <Button variant="primary">Default</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="outline">Outline</Button>
+          </div>
         </div>
       </div>
     </main>
