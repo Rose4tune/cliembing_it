@@ -26,23 +26,38 @@ const addNewLineAfterUseClient = (code) => {
 // React import 제거 (React 19에서 불필요)
 const removeReactImport = (code) => {
   const reactImportRegex =
-    /^\s*import\s+\*\s+as\s+React\s+from\s+['"]react['"]\s*;\s*\n?/gm;
+    /^\s*import\s+\*\s+as\s+React\s+from\s+['"]react['"]\s*;?\s*\n?/gm;
   const hasReactImport = reactImportRegex.test(code);
   const updatedCode = code.replace(reactImportRegex, "");
   return { code: updatedCode, removed: hasReactImport };
 };
 
-// import 경로 업데이트 (kebab-case -> PascalCase)
+// import 경로 업데이트
 const updateImportPaths = (code) => {
-  const importRegex = /(['"])@\/([\w-]+)\1/g;
   let updated = false;
-  const updatedCode = code.replace(importRegex, (match, quote, name) => {
-    if (name.includes("-") || /^[a-z]/.test(name)) {
+  let updatedCode = code;
+
+  // src/* -> ./* 변환
+  updatedCode = updatedCode.replace(
+    /(['"])src\/([\w-/]+)\1/g,
+    (match, quote, path) => {
       updated = true;
-      return `${quote}@/${kebabToPascal(name)}${quote}`;
+      return `${quote}../${path}${quote}`;
     }
-    return match;
-  });
+  );
+
+  // @/* kebab-case -> PascalCase 변환
+  updatedCode = updatedCode.replace(
+    /(['"])@\/([\w-]+)\1/g,
+    (match, quote, name) => {
+      if (name.includes("-") || /^[a-z]/.test(name)) {
+        updated = true;
+        return `${quote}@/${kebabToPascal(name)}${quote}`;
+      }
+      return match;
+    }
+  );
+
   return { code: updatedCode, updated };
 };
 
@@ -55,13 +70,6 @@ const updateFileContent = (filePath, fileName) => {
   const { code: withUpdatedImports, updated: importsUpdated } =
     updateImportPaths(withoutReactImport);
   const finalCode = addNewLineAfterUseClient(withUpdatedImports);
-
-  if (reactRemoved) {
-    console.log(`🗑️  Removed React import: ${fileName}`);
-  }
-  if (importsUpdated) {
-    console.log(`🔧 Updated imports in: ${fileName}`);
-  }
 
   if (finalCode !== content) {
     fs.writeFileSync(filePath, finalCode.trimStart(), "utf-8");
@@ -77,7 +85,6 @@ const renameFile = (baseName, ext, pascalName, dir) => {
   try {
     fs.renameSync(oldPath, tempPath);
     fs.renameSync(tempPath, newPath);
-    console.log(`✅ Renamed: ${baseName}${ext} → ${pascalName}${ext}`);
     return newPath;
   } catch (error) {
     console.error(`❌ Rename failed for ${baseName}${ext}:`, error.message);
@@ -88,11 +95,12 @@ const renameFile = (baseName, ext, pascalName, dir) => {
 // 디렉토리 내 모든 파일 처리
 const processDirectory = (dir) => {
   if (!fs.existsSync(dir)) {
-    console.log(`⚠️  Directory not found: ${dir}`);
+    console.error(`⚠️  Directory not found: ${dir}`);
     return;
   }
 
   const files = fs.readdirSync(dir);
+  const processedFiles = [];
 
   files.forEach((file) => {
     const filePath = path.join(dir, file);
@@ -116,8 +124,61 @@ const processDirectory = (dir) => {
 
         if (renamedFilePath) {
           updateFileContent(renamedFilePath, `${pascalName}${ext}`);
+          processedFiles.push(renamedFilePath);
         }
       }
+    }
+  });
+
+  // 처리된 파일들을 디렉토리 구조로 재구성
+  processedFiles.forEach((filePath) => {
+    organizeIntoDirectory(filePath);
+  });
+};
+
+// 파일을 디렉토리 구조로 재구성 (Button.tsx -> Button/Button.tsx)
+const organizeIntoDirectory = (filePath) => {
+  const ext = path.extname(filePath);
+  const baseName = path.basename(filePath, ext);
+  const dirPath = path.dirname(filePath);
+
+  if (path.basename(dirPath) === baseName) {
+    return filePath;
+  }
+
+  const newDirPath = path.join(dirPath, baseName);
+  if (!fs.existsSync(newDirPath)) {
+    fs.mkdirSync(newDirPath, { recursive: true });
+  }
+
+  const newFilePath = path.join(newDirPath, `${baseName}${ext}`);
+  fs.renameSync(filePath, newFilePath);
+
+  const indexPath = path.join(newDirPath, "index.ts");
+  fs.writeFileSync(indexPath, `export * from "./${baseName}";\n`, "utf-8");
+
+  return newFilePath;
+};
+
+// 잘못된 위치의 파일을 올바른 위치로 이동
+const moveToCorrectLocation = () => {
+  const rootDir = path.resolve(__dirname, "..");
+  const wrongLocations = [path.join(rootDir, "src"), path.join(rootDir, "@")];
+
+  wrongLocations.forEach((wrongDir) => {
+    if (fs.existsSync(wrongDir)) {
+      const files = fs.readdirSync(wrongDir);
+      files.forEach((file) => {
+        const srcPath = path.join(wrongDir, file);
+        const destPath = path.join(UI_WEB_DIR, file);
+
+        if (fs.statSync(srcPath).isFile()) {
+          fs.renameSync(srcPath, destPath);
+        }
+      });
+
+      // 빈 디렉토리 삭제
+      fs.rmdirSync(wrongDir, { recursive: true });
     }
   });
 };
@@ -128,29 +189,20 @@ const main = () => {
 
   if (!component) {
     console.error("❌ Usage: pnpm add:ui <component-name>");
-    console.error("   Example: pnpm add:ui button");
     process.exit(1);
   }
 
-  console.log(`\n📦 Installing shadcn component: ${component}\n`);
-
   try {
-    // shadcn add 실행 (packages/ui-web에서)
     execSync(
       `cd packages/ui-web && pnpm dlx shadcn@latest add ${component} --yes`,
       { stdio: "inherit" }
     );
-
-    console.log(`\n🔄 Converting to PascalCase...\n`);
-
-    // 변환 처리
+    moveToCorrectLocation();
     processDirectory(UI_WEB_DIR);
 
-    console.log(
-      `\n✨ Done! Component installed and converted to PascalCase.\n`
-    );
+    console.log("✨ Done! Component installed and converted to PascalCase.");
   } catch (error) {
-    console.error(`\n❌ Error: ${error.message}\n`);
+    console.error("❌ Error:", error.message);
     process.exit(1);
   }
 };
