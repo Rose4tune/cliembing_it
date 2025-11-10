@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Button } from "@pkg/ui-web";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -13,24 +14,25 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="fixed top-4 right-4 p-3 rounded-lg bg-muted">
+      <Button
+        disabled
+        size="icon"
+        className="fixed top-4 right-4 bg-muted"
+      >
         <span className="w-5 h-5 block">🌓</span>
-      </button>
+      </Button>
     );
   }
 
   return (
-    <button
+    <Button
+      size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed top-4 right-4 p-3 rounded-lg bg-muted hover:bg-accent transition-colors"
+      className="fixed top-4 right-4 bg-muted hover:bg-accent transition-colors"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
-        <span className="text-xl">☀️</span>
-      ) : (
-        <span className="text-xl">🌙</span>
-      )}
-    </button>
+      <span className="text-xl block p-1">{theme === "dark" ? "☀️" : "🌙"}</span>
+    </Button>
   );
 }
 

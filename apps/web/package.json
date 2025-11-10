@@ -15,6 +15,7 @@
     "@pkg/env": "workspace:*",
     "@pkg/features": "workspace:*",
     "@pkg/shared": "workspace:*",
+    "@pkg/style": "workspace:*",
     "@pkg/supabase": "workspace:*",
     "@pkg/ui": "workspace:*",
     "@pkg/ui-web": "workspace:*",

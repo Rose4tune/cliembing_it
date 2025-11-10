@@ -2,6 +2,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { Button } from "@pkg/ui-web";
 
 export default function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,7 @@ export default function LoginContent() {
           </h2>
 
           {/* 카카오 로그인 버튼 */}
-          <button
+          <Button
             onClick={handleKakaoLogin}
             disabled={isLoading}
             className="w-full bg-[#FEE500] text-[#000000] font-semibold py-3 px-4 rounded-lg hover:bg-[#FDD835] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
@@ -61,7 +62,7 @@ export default function LoginContent() {
                 <span>카카오 로그인</span>
               </>
             )}
-          </button>
+          </Button>
 
           {/* 에러 메시지 */}
           {error && (

@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { ThemeToggle } from "./components/ThemeToggle";
-import { Button } from "@pkg/ui";
+import { Button } from "@pkg/ui-web";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -45,28 +45,24 @@ export default function Home() {
                   </p>
                 )}
               </div>
-              <Link
-                href="/dashboard"
-                className="inline-block bg-primary text-primary-foreground font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition-opacity"
-              >
-                대시보드 가기
-              </Link>
+              <Button asChild size="lg" className="font-semibold">
+                <Link href="/dashboard">대시보드 가기</Link>
+              </Button>
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="inline-block bg-primary text-primary-foreground font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition-opacity"
-            >
-              로그인하기
-            </Link>
+            <Button asChild size="lg" className="font-semibold">
+              <Link href="/login">로그인하기</Link>
+            </Button>
+            
           )}
           <div className="flex gap-3 flex-wrap">
-            <Button variant="primary">Default</Button>
+            <Button variant="default">Default</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="destructive">Destructive</Button>
             <Button variant="ghost">Ghost</Button>
             <Button variant="outline">Outline</Button>
           </div>
+
         </div>
       </div>
     </main>

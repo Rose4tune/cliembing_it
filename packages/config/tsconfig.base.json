@@ -50,7 +50,7 @@
         "packages/shared/src/*"
       ],
       "@pkg/style/*": [
-        "packages/style/src/*"
+        "packages/style/*"
       ],
       "@pkg/supabase/*": [
         "packages/supabase/src/*"

@@ -1,0 +1,8 @@
+{
+  "name": "@pkg/style",
+  "private": true,
+  "exports": {
+    "./theme": "./theme.css",
+    "./base": "./base.css"
+  }
+}

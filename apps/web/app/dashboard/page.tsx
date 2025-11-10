@@ -2,6 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
+import { Button } from "@pkg/ui-web";
 
 export default function DashboardPage() {
   const { data: session } = useSession();
@@ -65,20 +66,22 @@ export default function DashboardPage() {
             </div>
 
             <div className="space-y-3">
-              <button
+              <Button
                 onClick={handleSignOut}
-                className="w-full bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                variant="secondary"
+                className="w-full"
               >
                 로그아웃
-              </button>
+              </Button>
 
-              <button
+              <Button
                 onClick={handleDeleteAccount}
                 disabled={isDeleting}
-                className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                variant="destructive"
+                className="w-full"
               >
                 {isDeleting ? "탈퇴 처리 중..." : "회원 탈퇴"}
-              </button>
+              </Button>
             </div>
           </div>
         ) : (

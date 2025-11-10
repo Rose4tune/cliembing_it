@@ -99,6 +99,9 @@ importers:
       '@pkg/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@pkg/style':
+        specifier: workspace:*
+        version: link:../../packages/style
       '@pkg/supabase':
         specifier: workspace:*
         version: link:../../packages/supabase
@@ -166,6 +169,8 @@ importers:
 
   packages/shared: {}
 
+  packages/style: {}
+
   packages/supabase:
     dependencies:
       '@supabase/ssr':
@@ -180,12 +185,9 @@ importers:
 
   packages/ui:
     dependencies:
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.1
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
+      '@pkg/ui-web':
+        specifier: workspace:*
+        version: link:../ui-web
       react:
         specifier: ^19
         version: 19.2.0
