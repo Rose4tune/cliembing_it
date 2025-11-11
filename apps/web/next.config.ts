@@ -2,10 +2,6 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // webpack 사용 (Turbopack 대신)
-  webpack: (config) => {
-    return config;
-  },
   transpilePackages: [
     '@pkg/auth',
     '@pkg/config',
