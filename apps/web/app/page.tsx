@@ -56,7 +56,7 @@ export default function Home() {
             
           )}
           <div className="flex gap-3 flex-wrap">
-            <Button variant="default">Default</Button>
+            <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="destructive">Destructive</Button>
             <Button variant="ghost">Ghost</Button>
