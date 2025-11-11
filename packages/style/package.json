@@ -1,5 +1,8 @@
 {
   "name": "@pkg/style",
-  "version": "0.0.0",
-  "description": "Shared style for Tailwind CSS"
+  "private": true,
+  "exports": {
+    "./theme": "./theme.css",
+    "./base": "./base.css"
+  }
 }

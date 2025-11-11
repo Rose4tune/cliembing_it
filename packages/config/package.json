@@ -1,5 +1,4 @@
 {
   "name": "@pkg/config",
-  "version": "0.0.0",
-  "description": "Shared configuration for ESLint, TypeScript, Tailwind, and Prettier"
+  "private": true
 }

@@ -1,0 +1,7 @@
+{
+  "name": "@pkg/features",
+  "private": true,
+  "exports": {
+    "./*": "./src/*/index.ts"
+  }
+}
