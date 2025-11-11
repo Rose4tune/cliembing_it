@@ -16,6 +16,7 @@
     "build:sb": "pnpm --filter=@storybook build",
     "lint": "turbo run lint",
     "lint:web": "pnpm --filter=@web lint",
+    "commitlint": "commitlint",
     "test": "turbo run test",
     "test:web": "pnpm --filter=@web test",
     "typecheck": "turbo run typecheck",
@@ -33,6 +34,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.38.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
