@@ -236,12 +236,9 @@ importers:
       '@pkg/ui-web':
         specifier: workspace:*
         version: link:../ui-web
-      react:
-        specifier: ^19
-        version: 19.2.0
-      react-dom:
-        specifier: ^19
-        version: 19.2.0(react@19.2.0)
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.2
 
   packages/ui-web:
     dependencies:
@@ -260,12 +257,6 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      react:
-        specifier: ^19.1.1
-        version: 19.2.0
-      react-dom:
-        specifier: ^19.1.1
-        version: 19.2.0(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -279,6 +270,12 @@ importers:
       '@turbo/gen':
         specifier: ^2.5.5
         version: 2.6.0(@types/node@24.10.0)(typescript@5.9.3)
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19.2.2
+        version: 19.2.2(@types/react@19.2.2)
       tailwindcss:
         specifier: ^4.1.11
         version: 4.1.16

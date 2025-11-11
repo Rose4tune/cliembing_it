@@ -5,11 +5,20 @@
     ".": "./src/index.ts",
     "./primitives/*": "./src/primitives/*/index.ts"
   },
-  "dependencies": {
-    "@pkg/ui-web": "workspace:*"
-  },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19"
+    "react": ">=19 <20",
+    "react-dom": ">=19 <20"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@pkg/ui-web": "workspace:*",
+    "@types/react": "^19.2.2"
   }
 }
