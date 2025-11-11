@@ -16,17 +16,24 @@
     "build:sb": "pnpm --filter=@storybook build",
     "lint": "turbo run lint",
     "lint:web": "pnpm --filter=@web lint",
+    "lint:staged": "lint-staged",
+    "prepare": "husky",
     "commitlint": "commitlint",
     "test": "turbo run test",
     "test:web": "pnpm --filter=@web test",
     "typecheck": "turbo run typecheck",
     "typecheck:web": "pnpm --filter=@web typecheck",
     "add:ui": "node scripts/add-shadcn.js",
-    "prepare": "husky install",
     "clean": "rimraf dist .next .turbo storybook-static"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --fix"
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "pnpm exec prettier --write"
+    ]
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",
