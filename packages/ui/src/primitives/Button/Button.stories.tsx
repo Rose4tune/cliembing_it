@@ -12,7 +12,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: "select",
-      options: ["sm", "md", "lg"],
+      options: ["sm", "md", "lg", "icon", "icon-sm", "icon-lg"],
     },
     disabled: {
       control: "boolean",
@@ -79,6 +79,27 @@ export const Large: Story = {
   },
 };
 
+export const Icon: Story = {
+  args: {
+    children: "Icon Button",
+    size: "icon",
+  },
+};
+
+export const IconSmall: Story = {
+  args: {
+    children: "Icon Small Button",
+    size: "icon-sm",
+  },
+};
+
+export const IconLarge: Story = {
+  args: {
+    children: "Icon Large Button",
+    size: "icon-lg",
+  },
+};
+
 export const Disabled: Story = {
   args: {
     children: "Disabled Button",
@@ -100,6 +121,11 @@ export const AllVariants: Story = {
         <Button size="sm">Small</Button>
         <Button size="md">Medium</Button>
         <Button size="lg">Large</Button>
+      </div>
+      <div className="flex gap-2">
+        <Button size="icon-sm">IS</Button>
+        <Button size="icon">Icon</Button>
+        <Button size="icon-lg">IL</Button>
       </div>
       <div className="flex gap-2">
         <Button disabled>Disabled</Button>
