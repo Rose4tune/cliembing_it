@@ -1,0 +1,7 @@
+{
+  "name": "@pkg/domain",
+  "private": true,
+  "exports": {
+    "./*": "./src/*/index.ts"
+  }
+}

@@ -1,6 +1,8 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { ThemeToggle } from "../components/ThemeToggle";
+import { Button } from "@pkg/ui-web";
 
 export default function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,24 +20,25 @@ export default function LoginContent() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-background text-foreground">
+      <ThemeToggle />
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-2">
             Just clIEmbing it 🧗
           </h1>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             climb together regardless of I or E
           </p>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold text-center text-gray-800">
+        <div className="bg-card border border-border shadow-lg rounded-lg p-8 space-y-6">
+          <h2 className="text-2xl font-bold text-center text-card-foreground">
             로그인
           </h2>
 
           {/* 카카오 로그인 버튼 */}
-          <button
+          <Button
             onClick={handleKakaoLogin}
             disabled={isLoading}
             className="w-full bg-[#FEE500] text-[#000000] font-semibold py-3 px-4 rounded-lg hover:bg-[#FDD835] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
@@ -59,7 +62,7 @@ export default function LoginContent() {
                 <span>카카오 로그인</span>
               </>
             )}
-          </button>
+          </Button>
 
           {/* 에러 메시지 */}
           {error && (
@@ -87,7 +90,7 @@ export default function LoginContent() {
           )}
 
           {/* 안내 메시지 */}
-          <div className="text-center text-sm text-gray-500 space-y-2">
+          <div className="text-center text-sm text-muted-foreground space-y-2">
             <p>카카오 계정으로 간편하게 로그인하세요</p>
             <p className="text-xs">
               로그인 시 서비스 이용약관에 동의한 것으로 간주됩니다
