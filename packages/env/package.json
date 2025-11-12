@@ -1,0 +1,11 @@
+{
+  "name": "@pkg/env",
+  "private": true,
+  "exports": {
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts"
+  },
+  "peerDependencies": {
+    "zod": "^3"
+  }
+}

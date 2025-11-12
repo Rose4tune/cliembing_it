@@ -1,0 +1,9 @@
+{
+  "name": "@pkg/shared",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./ports/*": "./src/ports/*.ts",
+    "./adapters/*": "./src/adapters/*/index.ts"
+  }
+}

@@ -1,5 +1,14 @@
-@import 'tailwindcss';
-@import '@style/tailwind.base.css';
+/* tailwindcss */
+@import "tailwindcss";
+@import "tw-animate-css";
 
-/* Additional global styles */
+/* source */
+@source "../app/**/*.{ts,tsx}";
+@source "../view/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+@source "../../../packages/ui-web/src/**/*.{ts,tsx}";
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
 
+/* style */
+@import "../../../packages/style/theme";
+@import "../../../packages/style/base";

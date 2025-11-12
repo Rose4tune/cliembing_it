@@ -1,0 +1,13 @@
+{
+  "name": "@pkg/supabase",
+  "private": true,
+  "exports": {
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts"
+  },
+  "peerDependencies": {
+    "next": "^16",
+    "@supabase/supabase-js": "^2",
+    "@supabase/ssr": "^0.5"
+  }
+}

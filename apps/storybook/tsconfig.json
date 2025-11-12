@@ -1,0 +1,27 @@
+{
+  "extends": "../../packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": [
+      "node",
+      "@storybook/react"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+  },
+  "include": [
+    "./.storybook/**/*",
+    "../web/src/**/*.stories.tsx",
+    "../web/src/**/*.stories.ts",
+    "../web/src/**/*.mdx",
+    "../../packages/ui/src/**/*.stories.tsx",
+    "../../packages/ui/src/**/*.stories.ts",
+    "../../packages/ui/src/**/*.mdx",
+    "../../packages/ui-web/src/**/*.stories.tsx",
+    "../../packages/ui-web/src/**/*.stories.ts",
+    "../../packages/ui-web/src/**/*.mdx"
+  ]
+}

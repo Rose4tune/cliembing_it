@@ -1,9 +1,6 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "../../",
-    "composite": true,
     "plugins": [
       {
         "name": "next"
@@ -15,14 +12,5 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".next",
-    ".turbo",
-    "**/*.test.ts",
-    "**/*.test.tsx"
   ]
 }
