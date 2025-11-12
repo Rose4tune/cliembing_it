@@ -22,18 +22,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install pnpm dependencies
-        run: pnpm install
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
+
+      - name: Install pnpm dependencies
+        run: pnpm install
 
       - name: Run semantic-release
         env:
