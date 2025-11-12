@@ -1,3 +1,7 @@
+## <small>0.1.1 (2025-11-12)</small>
+
+- fix: release version 수정 ([a95eb67](https://github.com/Rose4tune/cliembing-it/commit/a95eb67))
+
 ## 1.0.0 (2025-11-12)
 
 - fix: node version 24 변경 ([588dafc](https://github.com/Rose4tune/cliembing-it/commit/588dafc))
